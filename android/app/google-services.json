@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "512824963592",
+    "project_id": "whatshapp-ad2cd",
+    "storage_bucket": "whatshapp-ad2cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512824963592:android:7dae79c945c654e12517bd",
+        "android_client_info": {
+          "package_name": "com.whatshapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512824963592-7j0cvp5bksnl4hme0idfk24o0tc8nk65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_uIc7s-CVKKgEnxGOtIKc2e88YiaGKng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512824963592-7j0cvp5bksnl4hme0idfk24o0tc8nk65.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
