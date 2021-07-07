@@ -3,6 +3,7 @@ import React from 'react';
 
 import SignUpScreen from './src/Screen/SignUpScreen';
 import LoginScreen from './src/Screen/LoginScreen';
+import Home from './src/Screen/Home'
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -31,6 +32,12 @@ const App = () => {
             component={SignUpScreen}
             options={{headerShown: false}}
           />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{headerShown: false}}
+          />
+          
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

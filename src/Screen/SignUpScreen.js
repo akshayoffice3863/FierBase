@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {
   Text,
-  KeyboardAvoidingView,
   View,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import {TextInput, Button} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -12,6 +12,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+
 const SignUpScreen = ({navigation}) => {
   const [Data, setData] = useState({
     Name: '',
@@ -82,6 +83,7 @@ const SignUpScreen = ({navigation}) => {
         Profile: Data.Image,
       });
       setLoader(false);
+      navigation.navigate('Home');
     } catch (err) {
       alert(err);
       setLoader(false);
@@ -89,79 +91,83 @@ const SignUpScreen = ({navigation}) => {
   };
 
   return (
-    <View
-      style={{
-        paddingHorizontal: 30,
-        paddingVertical: 30,
-        flex: 1,
-      }}>
-      {Loader ? (
-        <ActivityIndicator
-          size="large"
-          color="green"
-          style={{
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            zIndex: 9999,
-          }}
-        />
-      ) : null}
-      <View
+    <View style={{flex: 1}}>
+      <ScrollView
         style={{
-          alignItems: 'center',
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
+          paddingHorizontal: 30,
+          paddingVertical: 30,
+          flex: 1,
         }}>
-        <Icon size={100} color="green" name="snapchat-square" />
-        <Text style={{fontSize: 50, fontWeight: 'bold', color: 'green'}}>
+        {Loader ? (
+          <ActivityIndicator
+            size="large"
+            color="green"
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              zIndex: 9999,
+            }}
+          />
+        ) : null}
+        <View
+          style={{
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+          }}>
+          <Icon size={100} color="green" name="snapchat-square" />
+          <Text style={{fontSize: 50, fontWeight: 'bold', color: 'green'}}>
+            Sign Up
+          </Text>
+        </View>
+
+        <TextInput
+          mode="outlined"
+          label="Enter Name"
+          style={{paddingVertical: 10}}
+          onChangeText={value => onChangeTextHandler('Name', value)}
+        />
+
+        <TextInput
+          mode="outlined"
+          label="Enter Email"
+          placeholder="Type something"
+          style={{paddingVertical: 10}}
+          onChangeText={value => onChangeTextHandler('Email', value)}
+        />
+        <TextInput
+          label="Enter Password"
+          secureTextEntry
+          mode="outlined"
+          onChangeText={value => onChangeTextHandler('PassWord', value)}
+          style={{paddingVertical: 10, marginBottom: 10}}
+        />
+        <Button
+          icon="camera"
+          mode="contained"
+          style={{marginVertical: 10}}
+          onPress={() => ImagePickerHandler()}>
+          Profile Picture
+        </Button>
+
+        <Button
+          mode="contained"
+          onPress={() => SignUpHandler()}
+          style={{marginVertical: 15}}>
           Sign Up
-        </Text>
-      </View>
+        </Button>
+        <View style={{flexDirection: 'row'}}>
+          <Text>Already Have Account? </Text>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={{color: 'green', fontWeight: 'bold'}}>Login Here</Text>
+          </TouchableOpacity>
+        </View>
 
-      <TextInput
-        mode="outlined"
-        label="Enter Name"
-        style={{paddingVertical: 10}}
-        onChangeText={value => onChangeTextHandler('Name', value)}
-      />
-
-      <TextInput
-        mode="outlined"
-        label="Enter Email"
-        placeholder="Type something"
-        style={{paddingVertical: 10}}
-        onChangeText={value => onChangeTextHandler('Email', value)}
-      />
-      <TextInput
-        label="Enter Password"
-        secureTextEntry
-        mode="outlined"
-        onChangeText={value => onChangeTextHandler('PassWord', value)}
-        style={{paddingVertical: 10, marginBottom: 10}}
-      />
-      <Button
-        icon="camera"
-        mode="contained"
-        style={{marginVertical: 10}}
-        onPress={() => ImagePickerHandler()}>
-        Profile Picture
-      </Button>
-
-      <Button
-        mode="contained"
-        onPress={() => SignUpHandler()}
-        style={{marginVertical: 15}}>
-        Sign Up
-      </Button>
-      <View style={{flexDirection: 'row'}}>
-        <Text>Already Have Account? </Text>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={{color: 'green', fontWeight: 'bold'}}>Login Here</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={{margin: 100}}></View>
+      </ScrollView>
     </View>
   );
 };
